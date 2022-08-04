@@ -1,21 +1,26 @@
-import {FC, useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "../../hooks";
-import {movieActions} from "../../redux";
-import {MovieListCard} from "../MovieListCard/MovieListCard";
-import {IMovie} from "../../interface";
+import {Link} from "react-router-dom";
+import {IMovieGenre, ISimSearchRes} from "../../interface";
+import {FC, ReactNode} from "react";
 
-const MovieList:FC = () => {
-
-    const {movies} = useAppSelector(state => state.movie)
-    const dispatch=useAppDispatch()
-    useEffect(()=>{
-        dispatch(movieActions.getDetails({id:2}))
-    },[dispatch])
-    return(<div>
-        {
-         movies.map(movie => <MovieListCard movie={movie}/>)
-        }
-    </div>)
+interface IProps {
+    movie:IMovieGenre|ISimSearchRes
+    children?: ReactNode
 }
+
+const MovieList:FC<IProps> = ({movie}) => {
+        return (
+            <div className={'movie-card'}>
+                <Link to={`/movies/${movie.id}`}>
+                    <div className={'image'}>
+                        <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt=''/>
+                        <h3>
+                            <div>{movie.title}</div>
+                        </h3>
+                    </div>
+                </Link>
+            </div>
+        );
+    };
+
 
 export {MovieList}

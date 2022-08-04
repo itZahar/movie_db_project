@@ -1,17 +1,16 @@
 import {FC, ReactNode} from "react";
-import {IMovie} from "../../interface";
+import {IMovieGenre, ISimSearchRes} from "../../interface";
+import {MovieList} from "../MovieList/MovieList";
 
 interface Iprops {
-    movie:IMovie,
+    movies:IMovieGenre[]|ISimSearchRes[]
     children?: ReactNode
 }
 
-const MovieListCard:FC<Iprops> = ({movie}) => {
-    const {original_title} = movie
-
-    return(<div>
-        <div>original_title:{original_title}</div>
-    </div>)
-}
+const MovieListCard:FC<Iprops> = ({movies}) => {
+    return (
+        <div className={'movies-container'}>{movies.map(movie => <MovieList key={movie.id} movie={movie}/>)}</div>
+    );
+};
 
 export {MovieListCard}

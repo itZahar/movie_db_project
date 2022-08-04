@@ -1,44 +1,35 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {moviesService} from "../../services";
-import {IMovies, IMovie, IDetails} from "../../interface";
+import { IMovieGenre, IMoviesGenre} from "../../interface";
 import {AxiosError} from "axios";
 
 
-
 interface IState {
-    movies : IMovie[];
+    movies : IMovieGenre[]
+    total_pages:number|null
+    error:null|string|unknown
+    status:null|string
 }
-
 const initialState:IState = {
-    movies: []
+    movies: [],
+    total_pages:null,
+    error:null,
+    status:null
 }
 
-const getDetails = createAsyncThunk<IDetails, {id:number}>(
-    'movieSlice/getDetails',
-    async ({id},{rejectWithValue})=>{
+const getMovies = createAsyncThunk<IMoviesGenre,{page:string|null}> (
+    'movieSlice/getMovies',
+    async ({page},{rejectWithValue}) => {
         try {
-            const {data} = await moviesService.getDetails(id)
+            const {data} = await moviesService.getMovies(page)
             return data
         }
-        catch (e) {
+        catch (e){
             const err = e as AxiosError
             return rejectWithValue(err.response?.data)
         }
     }
 )
-// const getMovies = createAsyncThunk<IMovie[],void> (
-//     'movieSlice/getMovies',
-//     async (_,{rejectWithValue}) => {
-//         try {
-//              const {data} = await moviesService.getMovies()
-//             return data
-//         }
-//         catch (e){
-//             const err = e as AxiosError
-//             return rejectWithValue(err.response?.data)
-//         }
-//     }
-// )
 
 const movieSlice = createSlice({
     name:'movieSlice',
@@ -47,19 +38,24 @@ const movieSlice = createSlice({
     },
     extraReducers:builder =>
         builder
-            // .addCase(getMovies.fulfilled,(state, action) => {
-            //     console.log(action.payload)
-            // })
-            .addCase(getDetails.fulfilled,(state, action)=>{
-                console.log(action.payload)
+            .addCase(getMovies.pending,(state, action)=>{
+                state.status = "pending"
+            })
+            .addCase(getMovies.fulfilled,(state, action) => {
+                state.movies = action.payload.results
+                state.total_pages = action.payload.total_pages
+                state.status = "fulfilled"
+            })
+            .addCase(getMovies.rejected,(state, action)=>{
+                state.status = "rejected"
+                state.error = action.payload
             })
 
 })
 
 const {reducer:movieReducer} = movieSlice
 const movieActions = {
-    // getMovies,
-    getDetails
+    getMovies
 }
 
 export {movieReducer,movieActions}
