@@ -3,7 +3,7 @@ import {FC, ReactNode} from "react";
 import {PaginationButton} from "../PaginationButton/PaginationButton";
 
 interface Iprops {
-    total_pages:number
+    total_pages:number|null
     children?: ReactNode
 }
 const Pagination:FC<Iprops> = ({total_pages}) => {
@@ -17,3 +17,5 @@ const Pagination:FC<Iprops> = ({total_pages}) => {
         </div>
     );
 };
+
+export {Pagination}

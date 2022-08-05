@@ -1,7 +1,7 @@
 import {FC, useEffect} from "react";
 import {useSearchParams} from "react-router-dom";
 
-import {MovieListCard} from "../../components";
+import {MovieListCard, Pagination} from "../../components";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {movieActions} from "../../redux";
 

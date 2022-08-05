@@ -62,6 +62,7 @@ const searchActions = {
 }
 
 export {
+    setSearchIsOpened,
     searchActions,
     searchReducer
 }

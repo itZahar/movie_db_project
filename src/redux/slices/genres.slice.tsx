@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 
 import {moviesService} from "../../services";
-import {IGenre, Igenres, IMoviesGenre} from "../../interface";
+import {IDetGenres, IGenre, IMoviesGenre} from "../../interface";
 
 
 const getGenres = createAsyncThunk<IGenre,void>(
@@ -18,11 +18,11 @@ const getGenres = createAsyncThunk<IGenre,void>(
         }
     }
 )
-const getMoviesByGenre = createAsyncThunk<IMoviesGenre,{id:number,page:string}>(
+const getMoviesByGenre = createAsyncThunk<IMoviesGenre,{Id:number,page:string|null}>(
     'genresSlice/getMoviesByGenre',
-    async ({id,page}, {rejectWithValue}) => {
+    async ({Id,page}, {rejectWithValue}) => {
         try {
-            return  await moviesService.getByGenreId(id,page)
+            return  await moviesService.getByGenreId(Id,page)
         }
         catch (e) {
             const err = e as AxiosError
@@ -34,15 +34,15 @@ const getMoviesByGenre = createAsyncThunk<IMoviesGenre,{id:number,page:string}>(
 
 interface IState {
     movies: IMoviesGenre|null
-    genres: null|Igenres[]
-    total_pages: null|number
+    genres: IDetGenres[]
+    total_pages: number|null
     statusGenres: null|string
     statusMovies: null|string
     error: null|string|unknown
 }
 const initialState:IState= {
     movies: null,
-    genres: null,
+    genres: [],
     total_pages: null,
     statusGenres: null,
     statusMovies: null,

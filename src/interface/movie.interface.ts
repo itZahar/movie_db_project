@@ -1,5 +1,5 @@
 export interface IMoviesGenre {
-    page:string,
+    page:string
     results :IMovieGenre[],
     total_pages: number,
     total_results: number

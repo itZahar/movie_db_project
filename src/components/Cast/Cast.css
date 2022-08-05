@@ -1,0 +1,48 @@
+.cast-container {
+    background-color: var(--background);
+    margin-top: 10px;
+    color: var(--text-primary);
+    padding: 15px 20px;
+}
+
+.cast-container h3 {
+    font-size: 38px;
+    text-align: center;
+}
+
+.cast {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.cast > div {
+    margin: 10px;
+    text-align: center;
+}
+
+.cast > div > img {
+    object-fit: cover;
+    border-radius: 100%;
+    height: 145px;
+    width: 145px;
+}
+
+@media screen and (max-width: 540px) {
+    .cast-container h3 {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .cast > div > img {
+
+        height: 100px;
+        width: 100px;
+    }
+
+    .cast > div {
+        max-width: 42%;
+        width: 100%;
+    }
+}

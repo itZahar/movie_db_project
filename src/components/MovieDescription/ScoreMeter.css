@@ -1,0 +1,40 @@
+.score {
+    flex-basis: 30%;
+    align-self: center;
+    position: relative;
+}
+
+.score span {
+    text-align: center;
+    display: block;
+    font-weight: 400;
+    font-size: 50px;
+    position: absolute;
+    height: 120px;
+    line-height: 120px;
+    width: 120px;
+}
+
+.scoreMeter {
+    transform: rotate(-90deg);
+    width: 120px;
+    height: 120px;
+    viewbox: "0 0 120 120";
+}
+
+.scoreMeter circle {
+    stroke-width: 8px;
+    fill: transparent;
+    cx: 60;
+    cy: 60;
+    r: 54;
+}
+
+.scoreMeterCircle {
+    stroke: whitesmoke;
+}
+
+.scoreMeterValue {
+    stroke: var(--accent);
+    transition: 1s stroke-dashoffset cubic-bezier(0.76, 0.21, 0.38, 0.88);
+}

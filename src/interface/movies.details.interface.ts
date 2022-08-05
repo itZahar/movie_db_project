@@ -1,8 +1,8 @@
 export interface ICredits{
     id: number
-    cast:ICreCust[]
+    cast:ICreCast[]
 }
-export interface ICreCust {
+export interface ICreCast {
     adult: boolean
     gender: number
     id: number
@@ -28,7 +28,7 @@ export interface IDetails{
     budget: number
     genres: IDetGenres[]
     homepage: string
-    id: 616037,
+    id: number
     imdb_id: string
     original_language:string
     original_title: string
@@ -105,9 +105,5 @@ export interface ISimSearchRes {
 
 
 export interface IGenre {
-    genres: Igenres[]
-}
-export interface Igenres{
-    id: number
-    name: string
+    genres: IDetGenres[]
 }

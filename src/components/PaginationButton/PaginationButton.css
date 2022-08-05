@@ -1,0 +1,32 @@
+.paginationBtns {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.pagination {
+    border: 2px solid var(--text-primary);
+    margin: auto 5px;
+    color: var(--text-primary);
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 60px;
+    height: 30px;
+}
+
+.pagination:hover :not(button[disabled]) {
+    background-color: var(--text-primary);
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.pagination button {
+    background: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    text-transform: capitalize;
+    color: var(--text-primary);
+}
