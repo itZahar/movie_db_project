@@ -1,9 +1,10 @@
 import {Link} from "react-router-dom";
-import {IMovieGenre, ISimSearchRes} from "../../interface";
+import {ISimSearchGenreRes} from "../../interface";
 import {FC, ReactNode} from "react";
+import './MovieList.css'
 
 interface IProps {
-    movie:IMovieGenre|ISimSearchRes
+    movie:ISimSearchGenreRes
     children?: ReactNode
 }
 

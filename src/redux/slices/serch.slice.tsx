@@ -2,10 +2,10 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 
 import {moviesService} from "../../services";
-import {ISimSearch,ISimSearchRes} from "../../interface";
+import {ISimSearchGenre, ISimSearchGenreRes} from "../../interface";
 
 
-const getMoviesBySearch = createAsyncThunk<ISimSearch, {search:string}>(
+const getMoviesBySearch = createAsyncThunk<ISimSearchGenre, {search:string}>(
     'searchSlice/getMoviesBySearch',
     async ({search},{rejectWithValue})=>{
         try {
@@ -18,7 +18,7 @@ const getMoviesBySearch = createAsyncThunk<ISimSearch, {search:string}>(
     }
 )
 interface IState {
-    movies: ISimSearchRes[]
+    movies: ISimSearchGenreRes[]
     isOpened: boolean
     status: null|string
     error: null|string|unknown
@@ -51,7 +51,6 @@ export const searchSlice = createSlice(
                     state.status = "rejected"
                     state.error = action.payload
                 })
-
     }
 )
 

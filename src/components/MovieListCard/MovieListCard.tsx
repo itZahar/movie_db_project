@@ -1,9 +1,10 @@
 import {FC, ReactNode} from "react";
-import {IMovieGenre, ISimSearchRes} from "../../interface";
+import {ISimSearchGenreRes} from "../../interface";
 import {MovieList} from "../MovieList/MovieList";
+import './MovieListCard.css'
 
 interface Iprops {
-    movies:IMovieGenre[]|ISimSearchRes[]
+    movies:ISimSearchGenreRes[]
     children?: ReactNode
 }
 

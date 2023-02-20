@@ -5,6 +5,7 @@ import {searchActions} from "../../redux/slices/serch.slice";
 import {SearchIcon} from "../../images";
 import {UserInfo} from "../UserInfo/UserInfo";
 import {SearchMovie} from "../SearchMovie/SearchMovie";
+import './Header.css'
 
 export interface IPropsTheme {
     switchTheme:any

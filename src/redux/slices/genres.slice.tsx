@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {AxiosError} from "axios";
 
 import {moviesService} from "../../services";
-import {IDetGenres, IGenre, IMoviesGenre} from "../../interface";
+import {IDetGenres, IGenre, ISimSearchGenre} from "../../interface";
 
 
 const getGenres = createAsyncThunk<IGenre,void>(
@@ -18,7 +18,7 @@ const getGenres = createAsyncThunk<IGenre,void>(
         }
     }
 )
-const getMoviesByGenre = createAsyncThunk<IMoviesGenre,{Id:number,page:string|null}>(
+const getMoviesByGenre = createAsyncThunk<ISimSearchGenre,{Id:number,page:string|null}>(
     'genresSlice/getMoviesByGenre',
     async ({Id,page}, {rejectWithValue}) => {
         try {
@@ -31,11 +31,10 @@ const getMoviesByGenre = createAsyncThunk<IMoviesGenre,{Id:number,page:string|nu
     }
 )
 
-
 interface IState {
-    movies: IMoviesGenre|null
+    movies: ISimSearchGenre|null
     genres: IDetGenres[]
-    total_pages: number|null
+    total_pages: number
     statusGenres: null|string
     statusMovies: null|string
     error: null|string|unknown
@@ -43,7 +42,7 @@ interface IState {
 const initialState:IState= {
     movies: null,
     genres: [],
-    total_pages: null,
+    total_pages: 0,
     statusGenres: null,
     statusMovies: null,
     error: null
@@ -55,28 +54,26 @@ export const genresSlice = createSlice(
         reducers: {},
         extraReducers: builder =>
             builder
-                .addCase(getGenres.pending,(state, action)=>{
-                    state.statusGenres = 'pending'
-                })
                 .addCase(getGenres.fulfilled,(state, action)=>{
                     state.statusGenres = 'fulfilled'
                     state.genres = action.payload.genres
-                })
-                .addCase(getGenres.rejected,(state, action)=>{
-                    state.statusGenres = 'rejected'
-                    state.error = action.payload
-                })
-                .addCase(getMoviesByGenre.pending,(state, action)=>{
-                    state.statusMovies = 'pending'
                 })
                 .addCase(getMoviesByGenre.fulfilled,(state, action)=>{
                     state.statusMovies = 'fulfilled'
                     state.movies = action.payload
                     state.total_pages = action.payload.total_pages
                 })
-                .addCase(getGenres.rejected,(state, action)=>{
-                    state.statusMovies = 'rejected'
-                    state.error = action.payload
+                .addDefaultCase((state, action) => {
+                    const [type] = action.type.split('/').splice(-1);
+                    switch (type) {
+                        case 'rejected':
+                            state.statusMovies = 'rejected'
+                            state.error = action.payload
+                            break;
+                        case 'pending':
+                            state.statusMovies = 'pending';
+                            break;
+                    }
                 })
 
     }

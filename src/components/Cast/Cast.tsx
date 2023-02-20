@@ -1,6 +1,7 @@
 import {FC} from "react";
 
 import {useAppSelector} from "../../hooks";
+import './Cast.css'
 
 const Cast:FC = () => {
     const {credits: cast} = useAppSelector(state => state.movieDesc);

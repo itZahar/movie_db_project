@@ -4,7 +4,7 @@ import {FC, useEffect} from "react";
 
 import {moviesActions} from "../../redux";
 import {MovieDescription, Cast, MovieListCard} from "../../components";
-
+import './MoviesPage.css'
 
 
 const MoviePage:FC = () => {
@@ -20,13 +20,13 @@ const MoviePage:FC = () => {
             left: 0,
             behavior: 'smooth'
         })
-        dispatch(moviesActions.getSim(Id))
         dispatch(moviesActions.getDetails(Id))
+        dispatch(moviesActions.getSim(Id))
         dispatch(moviesActions.getCredit(Id))
         return () => {
             dispatch(moviesActions.resetStore())
         }
-    }, [id])
+    }, [dispatch,id])
 
     return (
         <div>

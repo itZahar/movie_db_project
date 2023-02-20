@@ -1,6 +1,7 @@
 import {FC, useState} from "react";
 import {IPropsTheme} from "../Header/Header";
 import {ToggleButton} from "../ToggleButton/ToggleButton";
+import './UserInfo.css'
 
 const UserInfo:FC<IPropsTheme> = ({switchTheme, theme}) => {
     const [isOpened, setIsOpened] = useState(false);

@@ -1,7 +1,7 @@
 import {moviesService} from "../../services";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
-import {ICreCast, ICredits, IDetails, ISimSearch} from "../../interface";
+import {ICreCast, ICredits, IDetails, ISimSearchGenre, ISimSearchGenreRes} from "../../interface";
 
 const getCredit = createAsyncThunk<ICredits,number>(
     'moviesDetailsSlice/getCredit',
@@ -11,12 +11,11 @@ const getCredit = createAsyncThunk<ICredits,number>(
         }
         catch (e) {
             return rejectWithValue(e)
-
         }
     }
 )
 const getDetails = createAsyncThunk<IDetails,number>(
-    'moviesDetailsSlice/getCredit',
+    'moviesDetailsSlice/getDetails',
     async (id,{rejectWithValue})=>{
         try {
             return await moviesService.getDetails(id)
@@ -26,7 +25,7 @@ const getDetails = createAsyncThunk<IDetails,number>(
         }
     }
 )
-const getSim = createAsyncThunk<ISimSearch,number>(
+const getSim = createAsyncThunk<ISimSearchGenre,number>(
     'moviesDetailsSlice/getSim',
     async (id,{rejectWithValue})=>{
         try {
@@ -40,7 +39,7 @@ const getSim = createAsyncThunk<ISimSearch,number>(
 interface IState {
     movieDesc: null|any
     credits: null |ICreCast[]
-    similar: null|any
+    similar: []|ISimSearchGenreRes[]
     error:null|string|unknown
     status:null|string
 }
@@ -48,7 +47,7 @@ interface IState {
 const initialState:IState = {
     movieDesc: null,
     credits: null,
-    similar: null,
+    similar: [],
     status: null,
     error: null
 }
@@ -59,7 +58,7 @@ const moviesDetailsSlice = createSlice({
         resetStore: (state) => {
             state.movieDesc = null
             state.credits = null
-            state.similar = null
+            state.similar = []
             state.status = null
             state.error = null
         }
@@ -93,7 +92,6 @@ const moviesDetailsSlice = createSlice({
 
             })
 })
-
 
 const {reducer:moviesDetailsReducer,actions:{resetStore}} = moviesDetailsSlice
 const moviesActions = {

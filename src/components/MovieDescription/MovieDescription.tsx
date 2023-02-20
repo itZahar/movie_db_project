@@ -2,6 +2,7 @@ import {FC, useEffect, useState} from "react";
 
 import {useAppSelector} from "../../hooks";
 import {GenresBadges} from "../GenresBadges/GenresBadges";
+import './ScoreMeter.css'
 
 const MovieDescription:FC = () => {
     const {movieDesc} = useAppSelector(state => state.movieDesc);

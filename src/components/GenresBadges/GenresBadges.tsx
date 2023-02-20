@@ -9,12 +9,11 @@ interface IProps {
 }
 
 const GenresBadges:FC<IProps> = ({genres}) => {
-    let randomColor = require('random-color')
     return (
         <div>{genres?.map(({name, id}) => {
             return <Link to={'/genres/' + id} key={id}>
                 <Badge bg={"primary"}
-                       style={{color: `${randomColor()}`}}>{name}</Badge>
+                       style={{backgroundColor: "yellow", color:"Purple"}}>{name}</Badge>
             </Link>
         })}
         </div>

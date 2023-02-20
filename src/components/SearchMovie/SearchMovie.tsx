@@ -2,6 +2,7 @@ import {useForm} from "react-hook-form";
 import {useAppDispatch} from "../../hooks";
 import React, {FC, ReactNode} from "react";
 import {searchActions} from "../../redux/slices/serch.slice";
+import './SearchMovie.css'
 
 
 export interface IProps {

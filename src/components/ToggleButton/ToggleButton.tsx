@@ -1,7 +1,10 @@
-import {FC} from "react";
+import React, {FC} from 'react';
+
+import './ToggleButton.scss'
 import {IPropsTheme} from "../Header/Header";
 
 const ToggleButton:FC<IPropsTheme> = ({switchTheme, theme}) => {
+
     return (
         <div className={'dark-mode-toggle'}>
             <div>DarkMode:</div>

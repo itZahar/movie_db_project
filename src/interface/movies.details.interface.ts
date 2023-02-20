@@ -74,15 +74,15 @@ export interface IDetGenres {
 
 
 
-export interface ISimSearch {
-    page: number,
-    results: ISimSearchRes[]
+export interface ISimSearchGenre {
+    page: number|string
+    results: ISimSearchGenreRes[]
     total_pages: number
     total_results: number
 }
 
-export interface ISimSearchRes {
-    adult: false,
+export interface ISimSearchGenreRes {
+    adult: boolean
     backdrop_path: string
     genre_ids: number[],
     id: number

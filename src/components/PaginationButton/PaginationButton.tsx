@@ -1,7 +1,16 @@
 import {Link, useLocation} from "react-router-dom";
+import {FC, ReactNode} from "react";
+import './PaginationButton.css'
 
+interface Iprops {
+    to:any
 
-const PaginationButton = ({to, state, disabled = false, isNav = false, children, ...props}) => {
+    disabled:boolean
+
+    children?: ReactNode
+}
+// @ts-ignore
+const PaginationButton:FC<Iprops> = ({to, state, disabled = false, isNav = false, children, ...props}) => {
     const {search} = useLocation();
 
     return (
